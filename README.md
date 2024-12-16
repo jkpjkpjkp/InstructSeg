@@ -46,7 +46,7 @@ Boosted by Multi-modal Large Language Models (MLLMs), text-guided universal segm
 
 ### Multi-modal Question Answering Benchmarks.
 <p align="center">
- <img src="imgs/exp_mmbench.jpg" width="100%">
+ <img src="imgs/exp_mmbench.jpg" width="90%">
 </p>
 
 
