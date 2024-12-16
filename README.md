@@ -31,22 +31,22 @@ Boosted by Multi-modal Large Language Models (MLLMs), text-guided universal segm
 ## Results
 ### RES & ReasonSeg
 <p align="center">
- <img src="imgs/exp_res.jpg" width="100%">
+ <img src="imgs/exp_res.jpg" width="90%">
 </p>
 
 ### Reasoning Video Object Segmentation
 <p align="center">
- <img src="imgs/exp_revos.jpg" width="100%">
+ <img src="imgs/exp_revos.jpg" width="90%">
 </p>
 
 ### Referring Video Object Segmentation
 <p align="center">
- <img src="imgs/exp_rvos.jpg" width="100%">
+ <img src="imgs/exp_rvos.jpg" width="90%">
 </p>
 
 ### Multi-modal Question Answering Benchmarks.
 <p align="center">
- <img src="imgs/exp_mmbench.jpg" width="90%">
+ <img src="imgs/exp_mmbench.jpg" width="75%">
 </p>
 
 
