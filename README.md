@@ -1,9 +1,5 @@
 # InstructSeg: Unifying Instructed Visual Segmentation with Multi-modal Large Language Models
 
-> #### Cong Wei, Yujie Zhong<sup>&dagger;</sup>, Haoxian Tan, Yingsen Zeng, Yong Liu, Zheng Zhao, and Yujiu Yang<sup>&dagger;</sup>
->
-> <sup>&dagger;</sup>Correspondence
-
 
 
 ## 📢 News
