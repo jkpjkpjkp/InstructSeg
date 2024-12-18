@@ -30,7 +30,7 @@ We define Instructed Visual Segmentation (IVS) as the union of four text-guided 
 </p>
 
 
-## 🤖 InstructSeg
+## 🤖 Pipeline of InstructSeg
 <p align="center">
  <img src="imgs/model.jpg" width="100%">
 </p>
