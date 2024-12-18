@@ -26,18 +26,20 @@ Boosted by Multi-modal Large Language Models (MLLMs), text-guided universal segm
 
 
 
-## 🤖 InstructSeg
-<p align="center">
- <img src="imgs/model.jpg" width="100%">
-</p>
-
-
 ## 👁️ Instructed Visual Segmentation (IVS) Tasks
 
 We define Instructed Visual Segmentation (IVS) as the union of four text-guided segmentation tasks across image and video domains: referring expression segmentation (RES), reasoning segmentation (ReasonSeg), referring video object segmentation (R-VOS) and reasoning video object segmentation (ReasonVOS). 
 <p align="center">
  <img src="imgs/intro.jpg" width="100%">
 </p>
+
+
+## 🤖 InstructSeg
+<p align="center">
+ <img src="imgs/model.jpg" width="100%">
+</p>
+
+
 
 
 ## 🌟 Results
