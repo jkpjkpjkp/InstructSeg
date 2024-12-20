@@ -54,16 +54,33 @@ We define Instructed Visual Segmentation (IVS) as the union of four text-guided 
 
 ## 🌟 Results
 ### RES & ReasonSeg
+
+<p align="center">
+ <img src="imgs/visual_res.jpg" width="90%">
+</p>
+
+<p align="center">
+ <img src="imgs/visual_reasonseg.jpg" width="90%">
+</p>
+
 <p align="center">
  <img src="imgs/exp_res.jpg" width="90%">
 </p>
 
 ### Reasoning Video Object Segmentation
 <p align="center">
+ <img src="imgs/visual_revos.jpg" width="90%">
+</p>
+
+<p align="center">
  <img src="imgs/exp_revos.jpg" width="90%">
 </p>
 
 ### Referring Video Object Segmentation
+<p align="center">
+ <img src="imgs/visual_rvos.jpg" width="90%">
+</p>
+
 <p align="center">
  <img src="imgs/exp_rvos.jpg" width="90%">
 </p>
