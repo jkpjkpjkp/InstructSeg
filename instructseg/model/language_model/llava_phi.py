@@ -793,7 +793,7 @@ class InstructSeg(MiphaPhiForCausalLM):
             cur_image_text_features = torch.cat((image_features[bs_idx], cur_refer_embedding), dim=0)
             cur_out_query = self.ovp_layers(
                 latents=cur_temporal_query[bs_idx:bs_idx+1].unsqueeze(1), x=cur_image_text_features.unsqueeze(0).unsqueeze(1))
-            # cur_out_query = self.expanded_seg_query_project(cur_out_query)
+
             out_temporal_query.append(cur_out_query)
         out_temporal_query = torch.cat(out_temporal_query, dim=0)
 
@@ -812,7 +812,7 @@ class InstructSeg(MiphaPhiForCausalLM):
             cur_image_text_features = torch.cat((image_features[bs_idx], cur_refer_embedding), dim=1)
             cur_out_query = self.ovp_layers(
                 latents=cur_temporal_query[bs_idx:bs_idx+1].unsqueeze(1).expand(-1, T, -1, -1), x=cur_image_text_features.unsqueeze(0))
-            # cur_out_query = self.expanded_seg_query_project(cur_out_query)
+
             out_temporal_query.append(cur_out_query)
         out_temporal_query = torch.cat(out_temporal_query, dim=0)
 
@@ -933,9 +933,6 @@ class InstructSeg(MiphaPhiForCausalLM):
         hidden_states = outputs.last_hidden_state
         logits = self.lm_head(hidden_states)
 
-        
-        class_name_embedding = None
-        region_embedding_list = None
 
         if refer_embedding_indices is not None:
             SEG_embedding = self.get_SEG_embedding(hidden_states, refer_embedding_indices, return_all=self.use_vmtf)
@@ -1198,12 +1195,6 @@ class InstructSeg(MiphaPhiForCausalLM):
                 SEG_embedding = self.SEG_token_projector(SEG_embedding)
             else:
                 SEG_embedding = None
-            
-            # if cur_temporal_query_masks is not None:
-            #     cur_temporal_query = self.get_seg_query(hidden_states, cur_temporal_query_masks)
-            #     cur_temporal_query = self.temporal_query_project(cur_temporal_query)
-
-            region_embedding_list = None
 
             if cur_seg_query_mask is not None:
                 
@@ -1510,34 +1501,18 @@ class InstructSeg(MiphaPhiForCausalLM):
             while image_token_indices.numel() > 0:
                 cur_image_features = image_features[cur_image_idx]
                 image_token_start = image_token_indices[0]
-                if getattr(self.config, 'tune_mm_mlp_adapter', False) and getattr(self.config, 'mm_use_im_start_end', False):
-                    cur_new_input_embeds.append(self.get_model().embed_tokens(cur_input_ids[:image_token_start-1]).detach())
-                    cur_new_input_embeds.append(self.get_model().embed_tokens(cur_input_ids[image_token_start-1:image_token_start]))
-                    cur_new_input_embeds.append(cur_image_features)
-                    cur_new_input_embeds.append(self.get_model().embed_tokens(cur_input_ids[image_token_start+1:image_token_start+2]))
-                    if labels is not None:
-                        cur_new_labels.append(cur_labels[:image_token_start])
-                        cur_new_labels.append(torch.full((cur_image_features.shape[0],), IGNORE_INDEX, device=labels.device, dtype=labels.dtype))
-                        cur_new_labels.append(cur_labels[image_token_start:image_token_start+1])
-                        cur_labels = cur_labels[image_token_start+2:]
-                else:
-                    cur_new_input_embeds.append(self.get_model().embed_tokens(cur_input_ids[:image_token_start]))
-                    cur_new_input_embeds.append(cur_image_features)
-                    if labels is not None:
-                        cur_new_labels.append(cur_labels[:image_token_start])
-                        cur_new_labels.append(torch.full((cur_image_features.shape[0],), IGNORE_INDEX, device=labels.device, dtype=labels.dtype))
-                        cur_labels = cur_labels[image_token_start+1:]
+
+                cur_new_input_embeds.append(self.get_model().embed_tokens(cur_input_ids[:image_token_start]))
+                cur_new_input_embeds.append(cur_image_features)
+                if labels is not None:
+                    cur_new_labels.append(cur_labels[:image_token_start])
+                    cur_new_labels.append(torch.full((cur_image_features.shape[0],), IGNORE_INDEX, device=labels.device, dtype=labels.dtype))
+                    cur_labels = cur_labels[image_token_start+1:]
                 cur_image_idx += 1
-                if getattr(self.config, 'tune_mm_mlp_adapter', False) and getattr(self.config, 'mm_use_im_start_end', False):
-                    cur_input_ids = cur_input_ids[image_token_start+2:]
-                else:
-                    cur_input_ids = cur_input_ids[image_token_start+1:]
+                cur_input_ids = cur_input_ids[image_token_start+1:]
                 image_token_indices = torch.where(cur_input_ids == IMAGE_TOKEN_INDEX)[0]
             if cur_input_ids.numel() > 0:
-                if getattr(self.config, 'tune_mm_mlp_adapter', False) and getattr(self.config, 'mm_use_im_start_end', False):
-                    cur_new_input_embeds.append(self.get_model().embed_tokens(cur_input_ids).detach())
-                else:
-                    cur_new_input_embeds.append(self.get_model().embed_tokens(cur_input_ids))
+                cur_new_input_embeds.append(self.get_model().embed_tokens(cur_input_ids))
                 if labels is not None:
                     cur_new_labels.append(cur_labels)
             cur_new_input_embeds = [x.to(device=self.device) for x in cur_new_input_embeds]
