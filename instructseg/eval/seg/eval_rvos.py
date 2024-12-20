@@ -5,8 +5,6 @@ import os
 from enum import Enum
 from tqdm import tqdm
 import numpy as np
-import shutil
-
 
 
 from instructseg.utils import conversation as conversation_lib
@@ -14,15 +12,12 @@ from instructseg.utils.builder import load_pretrained_model
 from instructseg.datasets.InstructSegDatasets import RefDAVIS_Dataset, DataCollatorForCOCODatasetV2
 
 
-import cv2
 from PIL import Image
-from torch.utils.data import Dataset, DataLoader
 from transformers import SiglipImageProcessor
 
 from detectron2.data import MetadataCatalog, DatasetCatalog
 from typing import Dict, Optional, Sequence, List
 from dataclasses import dataclass, field
-
 import transformers
 from pathlib import Path
 
@@ -330,8 +325,8 @@ def evaluation(data_args):
     def load_ref_dataset():
         return RefDAVIS_Dataset(json_path=data_args.json_path, image_path_yv=data_args.image_folder, tokenizer=tokenizer, data_args=data_args, clip_image_processor=clip_image_processor)
 
-    DatasetCatalog.register('refcoco_dataset', load_ref_dataset)
-    MetadataCatalog.get('refcoco_dataset').set(stuff_classes=['object'],)
+    DatasetCatalog.register('rvos_dataset', load_ref_dataset)
+    MetadataCatalog.get('rvos_dataset').set(stuff_classes=['object'],)
 
 
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
