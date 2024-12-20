@@ -22,6 +22,19 @@ Boosted by Multi-modal Large Language Models (MLLMs), text-guided universal segm
 - **Superior Performance.** Our InstructSeg achieves state-of-the-art results on diverse Instructed Visual Segmentation benchmarks across both image and video domains, demonstrating the effectiveness of our simplified pipeline. Furthermore, InstructSeg also presents competitive performance on multiple Multi-modal benchmarks.
 
 
+## 🔍 Getting started with InstructSeg
+
+
+- [**Installation**](docs/INSTALL.md): We provide guidance to create environment and install required packages.
+
+- [**Datasets**](docs/DATASET.md): We provide guidance to download and change formats of datasets required for this project.
+
+- [**Model Weight**]: We provide the pretrained InstructSeg model weights [InstructSeg](https://huggingface.co/weic22/InstructSeg).
+
+- [**Training**](docs/TRAINING.md): We provide scripts on how to train the InstructSeg model for all the Instructed Visual Segmentation Tasks.
+
+- [**Evaluation**](docs/INFERENCE.md): We provide scripts for evaluating the performance of InstructSeg on Instructed Visual Segmentation Tasks across image and video domains.
+
 
 ## 👁️ Instructed Visual Segmentation (IVS) Tasks
 
@@ -59,5 +72,3 @@ We define Instructed Visual Segmentation (IVS) as the union of four text-guided 
 <p align="center">
  <img src="imgs/exp_mmbench.jpg" width="75%">
 </p>
-
-
