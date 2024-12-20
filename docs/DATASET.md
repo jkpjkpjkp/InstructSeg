@@ -6,7 +6,7 @@
 ```
 coco/
   train2014/
-    # image files for RefCOCO series
+    # image files required for RefCOCO series
 
 ```
 
