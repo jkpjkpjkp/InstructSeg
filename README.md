@@ -1,5 +1,6 @@
 # InstructSeg: Unifying Instructed Visual Segmentation with Multi-modal Large Language Models
 
+[![paper](https://img.shields.io/badge/arXiv-Paper-blue.svg)](https://arxiv.org/abs/2412.14006)
 
 
 ## 📢 News
