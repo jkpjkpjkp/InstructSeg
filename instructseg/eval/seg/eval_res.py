@@ -201,7 +201,7 @@ class DataArguments:
     mask_config: Optional[str] = field(default="../instructseg/model/mask_decoder/mask_config/maskformer2_swin_base_384_bs16_50ep.yaml")
     image_aspect_ratio: str = 'square'
     image_grid_pinpoints: Optional[str] = field(default=None)
-    json_path: str = '/dataset/refcoco/refcoco_evaluation.json'
+    json_path: str = '/dataset/RES/refcoco/refcoco_val.json'
     model_map_name: str = 'instructseg'
     version: str = 'llava_phi'
     output_dir: str = '../output/res'
