@@ -54,57 +54,21 @@ We define Instructed Visual Segmentation (IVS) as the union of four text-guided 
 
 ## 🌟 Results
 ### RES & ReasonSeg
-
-<p align="center">
- <img src="imgs/visual_res.jpg" width="90%">
-</p>
-
-<p align="center">
- <img src="imgs/visual_reasonseg.jpg" width="90%">
-</p>
-
 <p align="center">
  <img src="imgs/exp_res.jpg" width="90%">
 </p>
 
 ### Reasoning Video Object Segmentation
 <p align="center">
- <img src="imgs/visual_revos.jpg" width="90%">
-</p>
-
-<p align="center">
  <img src="imgs/exp_revos.jpg" width="90%">
 </p>
 
 ### Referring Video Object Segmentation
-<p align="center">
- <img src="imgs/visual_rvos.jpg" width="90%">
-</p>
-
 <p align="center">
  <img src="imgs/exp_rvos.jpg" width="90%">
 </p>
 
 ### Multi-modal Question Answering Benchmarks
 <p align="center">
- <img src="imgs/exp_mmbench.jpg" width="70%">
+ <img src="imgs/exp_mmbench.jpg" width="75%">
 </p>
-
-
-## 📚 Citation 
-Consider citing:
-
-```
-@article{wei2024instructseg,
-  title={InstructSeg: Unifying Instructed Visual Segmentation with Multi-modal Large Language Models},
-  author={Wei, Cong and Zhong, Yujie and Tan, Haoxian and Zeng, Yingsen and Liu, Yong and Zhao, Zheng and Yang, Yujiu},
-  journal={arXiv preprint arXiv:2412.14006},
-  year={2024}
-}
-```
-
-
-
-## Acknowledgement
-Thankful to Mipha, Mask2Former, and PSALM.
-
