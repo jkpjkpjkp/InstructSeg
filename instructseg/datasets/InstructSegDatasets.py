@@ -258,9 +258,6 @@ class REF_VOS_dataset_train(Base_dataset):
                 data_dict['refer_embedding_indices'] = refer_embedding_indices
                 return data_dict
 
-
-
-
 class RefDAVIS_Dataset(REF_VOS_dataset_train):
 
     def __getitem__(self, idx):
@@ -308,8 +305,6 @@ class RefDAVIS_Dataset(REF_VOS_dataset_train):
         data_dict['token_refer_id'] = token_refer_id
         data_dict['refer_embedding_indices'] = refer_embedding_indices
         return data_dict
-
-
 
 
 class Reason_VOS_dataset(Base_dataset):
@@ -409,6 +404,44 @@ class Reason_VOS_dataset(Base_dataset):
                     data_dict['token_refer_id'] = token_refer_id
                     data_dict['refer_embedding_indices'] = refer_embedding_indices
                     return data_dict
+
+class Reason_VOS_dataset_test(Reason_VOS_dataset):
+
+    def __getitem__(self, idx):
+
+
+        data_dict = self.data[idx]
+        sentences = [data_dict['expressions']['exp']]
+        
+        processor = self.data_args.image_processor
+        data_dict = processor.preprocess_revos_test(data_dict, is_train=False, clip_image_processor=self.clip_image_processor,)
+
+        prefix_inst = 'There are reference frames and key frame <temporal>\n<image>\n. Please doing Reasoning Segmentation according to the following instruction.'
+        instruction = ''
+
+        for sent in sentences:
+            instruction += ' {}'.format(sent)
+        instruction = instruction.strip()
+        instruction = instruction.replace('(s)', '')
+
+        token_refer_id = self.preprocess_referring_instruction(instruction)
+
+        sources = [[{'from': 'human', 'value': prefix_inst + f'\nThis is all the instruction: <refer>\n'},
+                    {'from': 'gpt', 'value': '\nSure, the segmentation result is [SEG]<seg>'}]]
+        text_dict = self.preprocess_llama2(sources, self.tokenizer)
+        input_ids = text_dict['input_ids'][0]
+        
+        refer_embedding_indices = torch.zeros_like(input_ids)
+        refer_embedding_indices[input_ids == REFER_TOKEN_INDEX] = 1
+
+        data_dict['input_ids'] = text_dict['input_ids'][0]
+        data_dict['labels'] = text_dict['labels'][0]
+        data_dict['dataset_type'] = "revos"
+
+        data_dict['token_refer_id'] = token_refer_id
+        data_dict['refer_embedding_indices'] = refer_embedding_indices
+        return data_dict
+
 
 
 class RefCOCO_dataset(Base_dataset):
@@ -722,9 +755,6 @@ class Reason_dataset(Base_dataset):
         data_dict['refer_embedding_indices'] = refer_embedding_indices
         return data_dict
 
-
-
-
 class Reason_dataset_test(Reason_dataset):
 
 
@@ -1010,6 +1040,7 @@ class MM_Conv_Dataset(Dataset):
                 return torch.tensor(input_ids, dtype=torch.long).squeeze()
             raise ValueError(f'Unsupported tensor type: {return_tensors}')
         return input_ids
+    
     def __getitem__(self, i) -> Dict[str, torch.Tensor]:
         sources = self.list_data_dict[i]
         # if isinstance(i, int):
