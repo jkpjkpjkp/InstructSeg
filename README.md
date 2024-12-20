@@ -106,5 +106,5 @@ Consider citing:
 
 
 ## Acknowledgement
--  Thankful to Mipha, Mask2Former, and PSALM.
+Thankful to Mipha, Mask2Former, and PSALM.
 
