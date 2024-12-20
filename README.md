@@ -5,7 +5,7 @@
 
 ## 📢 News
 - 🔥 Release InstructSeg project page.
-- 🔥 Our model weights and code have released.
+- 🔥 Our model weights, traing code, and evaluation scripts have been released.
 
 
 
