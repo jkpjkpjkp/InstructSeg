@@ -29,7 +29,7 @@ Boosted by Multi-modal Large Language Models (MLLMs), text-guided universal segm
 
 - [**Datasets**](docs/DATASET.md): We provide guidance to download and change formats of datasets required for this project.
 
-- [**Model Weight**]: We provide the pretrained InstructSeg model weights [InstructSeg](https://huggingface.co/weic22/InstructSeg).
+- [**Model Weight**](https://huggingface.co/weic22/InstructSeg): We provide the pretrained InstructSeg model weights [InstructSeg](https://huggingface.co/weic22/InstructSeg).
 
 - [**Training**](docs/TRAINING.md): We provide scripts on how to train the InstructSeg model for all the Instructed Visual Segmentation Tasks.
 
