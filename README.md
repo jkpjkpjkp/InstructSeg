@@ -4,8 +4,8 @@
 
 
 ## 📢 News
-- Release InstructSeg project page.
-- Our model and code is coming soon.
+- 🔥 Release InstructSeg project page.
+- 🔥 Our model weights and code have released.
 
 
 
