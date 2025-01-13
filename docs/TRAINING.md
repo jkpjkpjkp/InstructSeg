@@ -17,3 +17,8 @@ Loading Mask2Former Swin-B weights [Mask2Former](https://dl.fbaipublicfiles.com/
 sh scripts/seg/train.sh
 ```
 
+## Merge lora weights
+After the training stage, merge the output/model/checkpoint-100000 and save the final InstructSeg model weight.
+```shell
+sh scripts/seg/merge_lora_weights.sh
+```
