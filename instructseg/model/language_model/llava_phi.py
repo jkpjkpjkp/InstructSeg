@@ -230,21 +230,17 @@ class InstructSeg(MiphaPhiForCausalLM):
         dice_weight = cfg.MODEL.MASK_FORMER.DICE_WEIGHT
         mask_weight = cfg.MODEL.MASK_FORMER.MASK_WEIGHT
         # boundary_weight = cfg.MODEL.MASK_FORMER.BOUNDARY_WEIGHT
-
-        bbox_weight, boxgiou_weight, boxiou_weight = 2.0, 2.0, 2.0
         
         matcher = hungarian_matcher_InstructSeg(
             cost_class=class_weight,
             cost_mask=mask_weight,
             cost_dice=dice_weight,
-            cost_box = bbox_weight,
-            cost_giou = boxgiou_weight,
             num_points=cfg.MODEL.MASK_FORMER.TRAIN_NUM_POINTS,
         )
         
         weight_dict = {"loss_SEG_class": class_weight,  "loss_mask": mask_weight,
                        "loss_dice": dice_weight,
-                       "loss_bbox": bbox_weight, "loss_boxgiou": boxgiou_weight, "loss_boxiou": boxiou_weight,}
+                       }
         self.weight_dict = weight_dict
         if deep_supervision:
             dec_layers = cfg.MODEL.MASK_FORMER.DEC_LAYERS
@@ -252,7 +248,7 @@ class InstructSeg(MiphaPhiForCausalLM):
             for i in range(dec_layers - 1):
                 aux_weight_dict.update({k + f"_{i}": v for k, v in weight_dict.items()})
             weight_dict.update(aux_weight_dict)
-        losses = ["SEG_labels", "masks", 'boxes']
+        losses = ["SEG_labels", "masks",]
         self.criterion = InstructSeg_criterion(
             matcher=matcher,
             losses=losses,
@@ -403,7 +399,6 @@ class InstructSeg(MiphaPhiForCausalLM):
                 {
                     "labels": targets_per_image.gt_classes,
                     "masks": padded_masks,
-                    "boxes": targets_per_image.gt_boxes,
                     "valid": valid_id,
                     "inst_id": inst_ids,
                     # "positive_map": positive_map,
@@ -976,7 +971,7 @@ class InstructSeg(MiphaPhiForCausalLM):
                 llm_loss = loss_fct(shift_logits, shift_labels)
 
         
-        if seg_query_mask is not None and not self.generative_mode:
+        if seg_query_mask is not None:
             
             seg_query = self.get_seg_query(hidden_states, seg_query_mask)  # bs N 2560
             
