@@ -242,7 +242,6 @@ class InstructSeg_criterion(nn.Module):
         loss_map = {
             'SEG_labels': self.loss_SEG_labels,
             'masks': self.loss_masks,
-            'boxes': self.loss_boxes,
 
         }
         assert loss in loss_map, f"do you really want to compute {loss} loss?"
@@ -322,7 +321,7 @@ class InstructSeg_criterion(nn.Module):
 class hungarian_matcher_InstructSeg(HungarianMatcher):
 
     def __init__(self, cost_class: float = 1, cost_mask: float = 1, cost_dice: float = 1, num_points: int = 0,
-                cost_box: float = 0, cost_giou: float = 0):
+                ):
         """Creates the matcher
 
         Params:
@@ -334,8 +333,6 @@ class hungarian_matcher_InstructSeg(HungarianMatcher):
         self.cost_class = cost_class
         self.cost_mask = cost_mask
         self.cost_dice = cost_dice
-        self.cost_box = cost_box
-        self.cost_giou = cost_giou
 
         assert cost_class != 0 or cost_mask != 0 or cost_dice != 0, "all costs cant be 0"
 
