@@ -1,3 +1,4 @@
+addict
 einops
 numpy
 sentencepiece
@@ -5,13 +6,13 @@ uvicorn
 wandb
 tqdm
 fvcore
+pandas
 pycocotools
 matplotlib
 detectron2
-deepspeed==0.9.5
+deepspeed==0.14.4
 peft==0.4.0
 accelerate==0.21.0
-scikit-learn==1.2.2
-sentencepiece==0.1.99
+scikit-learn
 timm==0.6.13
 transformers==4.38.2
